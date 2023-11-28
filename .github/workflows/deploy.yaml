@@ -8,11 +8,11 @@ on:
 jobs:
   deploy_repo:
     runs-on: ubuntu-latest
-    
+
     env:
       REPO_NAME: owldq-dev
-      DESCRIPTION: 'owldq-dev-env'
-      
+      DESCRIPTION: test
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -22,3 +22,6 @@ jobs:
           bash scripts/deploy.sh
         env:
           GITHUB_TOKEN: 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
+          REPO_NAME: ${{ env.REPO_NAME }}
+          DESCRIPTION: ${{ env.DESCRIPTION }}
+
