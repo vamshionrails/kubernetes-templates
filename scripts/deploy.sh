@@ -5,8 +5,8 @@ USERNAME="$GITHUB_ACTOR"
 TOKEN="$GITHUB_TOKEN"  # Access the GITHUB_TOKEN directly
 
 # Repository details
-PRIVATE=false
-INITIALIZE_README=true
+PRIVATE=$PRIVATE
+INITIALIZE_README=$INITIALIZE_README
 
 # Set the repository name and description
 REPO_NAME=${REPO_NAME:-"your-repo-name"}
