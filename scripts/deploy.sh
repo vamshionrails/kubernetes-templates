@@ -12,6 +12,10 @@ INITIALIZE_README=$INITIALIZE_README
 REPO_NAME=${REPO_NAME:-"your-repo-name"}
 DESCRIPTION=${DESCRIPTION:-"Your repository description"}
 
+# Set global git configurations
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
 # Check if the DELETE_REPO variable is set
 if [[ "$DELETE_REPO" == "true" ]]; then
   # Delete the repository
