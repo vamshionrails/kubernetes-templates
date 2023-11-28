@@ -12,6 +12,8 @@ jobs:
     env:
       REPO_NAME: owldq-dev
       DESCRIPTION: Your repository description
+      PRIVATE: false
+      INITIALIZE_README: true
       DELETE_REPO: false  # Set to true if you want to delete the repository
 
     steps:
