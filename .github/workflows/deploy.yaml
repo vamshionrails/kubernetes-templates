@@ -22,7 +22,7 @@ jobs:
         run: |
           bash scripts/deploy.sh
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: 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
           REPO_NAME: ${{ env.REPO_NAME }}
           DESCRIPTION: ${{ env.DESCRIPTION }}
           DELETE_REPO: ${{ env.DELETE_REPO }}
