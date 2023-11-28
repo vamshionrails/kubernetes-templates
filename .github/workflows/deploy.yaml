@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      REPO_NAME: your-repo-name
+      REPO_NAME: owldq-dev
       DESCRIPTION: Your repository description
-      DELETE_REPO: true  # Set to true if you want to delete the repository
+      DELETE_REPO: false  # Set to true if you want to delete the repository
 
     steps:
       - name: Checkout code
