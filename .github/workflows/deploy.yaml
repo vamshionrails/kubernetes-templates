@@ -1,4 +1,4 @@
-name: Create GitHub Repo
+name: Deploy to GitHub Repo
 
 on:
   push:
@@ -6,14 +6,14 @@ on:
       - main
 
 jobs:
-  create_repo:
+  deploy_repo:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run script to create GitHub repo
+      - name: Run deploy script
         run: |
           bash scripts/deploy.sh
         env:
