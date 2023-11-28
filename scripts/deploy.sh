@@ -27,7 +27,6 @@ else
   echo "Repository created successfully: $USERNAME/$REPO_NAME"
 
 # Move to the repository directory
-  cd $REPO_NAME
 
   # Create additional folders and files
   mkdir -p src
