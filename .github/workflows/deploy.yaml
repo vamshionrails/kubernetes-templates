@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      REPO_NAME: owldq-dev
-      DESCRIPTION: test
+      REPO_NAME: your-repo-name
+      DESCRIPTION: Your repository description
+      DELETE_REPO: false  # Set to true if you want to delete the repository
 
     steps:
       - name: Checkout code
@@ -21,7 +22,7 @@ jobs:
         run: |
           bash scripts/deploy.sh
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO_NAME: ${{ env.REPO_NAME }}
           DESCRIPTION: ${{ env.DESCRIPTION }}
-
+          DELETE_REPO: ${{ env.DELETE_REPO }}
