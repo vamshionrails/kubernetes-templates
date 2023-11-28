@@ -15,6 +15,6 @@ jobs:
 
       - name: Run script to create GitHub repo
         run: |
-          bash scripts/create_repo.sh
+          bash scripts/deploy.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
