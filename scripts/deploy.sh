@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # GitHub credentials
-USERNAME="YOUR_USERNAME"
-TOKEN="YOUR_TOKEN"
+USERNAME="$GITHUB_ACTOR"
+TOKEN="$GITHUB_TOKEN"  # Access the GITHUB_TOKEN directly
 
 # Repository details
 REPO_NAME="your-repo-name"
