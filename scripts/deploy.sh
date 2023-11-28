@@ -27,7 +27,10 @@ else
   echo "Repository created successfully: $USERNAME/$REPO_NAME"
 
   # Copy contents of local 'template' folder to the repository
-  cp -r template/* /
+  mkdir -p helmcharts
+  mkdir -p scripts
+  mkdir -p configs
+  touch helmfile.yaml
 
   # Add and commit changes
   git add .
