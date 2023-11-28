@@ -21,4 +21,12 @@ else
   # Create a new repository
   curl -u "$USERNAME:$TOKEN" https://api.github.com/user/repos -d "{\"name\":\"$REPO_NAME\",\"description\":\"$DESCRIPTION\",\"private\":$PRIVATE,\"auto_init\":$INITIALIZE_README}"
   echo "Repository created successfully: $USERNAME/$REPO_NAME"
+
+  # Copy contents of local 'template' folder to the repository
+  cp -r template/* test/
+
+  # Add and commit changes
+  git add .
+  git commit -m "Add 'test' folder with README.md"
+  git push origin main
 fi
