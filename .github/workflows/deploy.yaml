@@ -1,5 +1,4 @@
-
-name: CI/CD Pipeline
+name: Create GitHub Repo
 
 on:
   push:
@@ -7,14 +6,15 @@ on:
       - main
 
 jobs:
-  deploy:
+  create_repo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2 
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Deploy
+      - name: Run script to create GitHub repo
         run: |
-          chmod +x ./scripts/deploy.sh
-          ./scripts/deploy.sh
+          bash scripts/create_repo.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
