@@ -15,7 +15,7 @@ DESCRIPTION=${DESCRIPTION:-"Your repository description"}
 # Check if the DELETE_REPO variable is set
 if [[ "$DELETE_REPO" == "true" ]]; then
   # Delete the repository
-  curl -X DELETE -u "$USERNAME:$TOKEN" "https://api.github.com/repos/$USERNAME/$REPO_NAME"
+  curl -L -X DELETE -u "$USERNAME:$TOKEN" "https://api.github.com/repos/$USERNAME/$REPO_NAME"
   echo "Repository deleted successfully: $USERNAME/$REPO_NAME"
 else
   # Create a new repository
