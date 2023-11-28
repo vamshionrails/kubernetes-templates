@@ -23,7 +23,7 @@ else
   echo "Repository created successfully: $USERNAME/$REPO_NAME"
 
   # Copy contents of local 'template' folder to the repository
-  cp -r template/* test/
+  cp -r template/* 
 
   # Add and commit changes
   git add .
