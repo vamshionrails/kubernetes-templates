@@ -26,14 +26,23 @@ else
   curl -u "$USERNAME:$TOKEN" https://api.github.com/user/repos -d "{\"name\":\"$REPO_NAME\",\"description\":\"$DESCRIPTION\",\"private\":$PRIVATE,\"auto_init\":$INITIALIZE_README}"
   echo "Repository created successfully: $USERNAME/$REPO_NAME"
 
-  # Copy contents of local 'template' folder to the repository
-  mkdir -p helmcharts
-  mkdir -p scripts
-  mkdir -p configs
-  touch helmfile.yaml
+# Move to the repository directory
+  cd $REPO_NAME
+
+  # Create additional folders and files
+  mkdir -p src
+  echo "// Your source code" > src/main.cpp
+
+  mkdir -p docs
+  echo "# Documentation" > docs/README.md
 
   # Add and commit changes
   git add .
-  git commit -m "Add 'test' folder with README.md"
+  git commit -m "Add src and docs folders"
+  git branch -M main
   git push origin main
+
+  echo "Additional folders and files added to the repository."
+
+ 
 fi
