@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      REPO_NAME: owldq-dev-02
+      REPO_NAME: owldq-dev-03
       DESCRIPTION: Your repository description
       PRIVATE: false
       INITIALIZE_README: true
@@ -24,7 +24,7 @@ jobs:
         run: |
           bash scripts/deploy.sh
         env:
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           REPO_NAME: ${{ env.REPO_NAME }}
           DESCRIPTION: ${{ env.DESCRIPTION }}
           DELETE_REPO: ${{ env.DELETE_REPO }}
