@@ -14,7 +14,7 @@ jobs:
       DESCRIPTION: Your repository description
       PRIVATE: false
       INITIALIZE_README: true
-      DELETE_REPO: true  # Set to true if you want to delete the repository
+      DELETE_REPO: false  # Set to true if you want to delete the repository
 
     steps:
       - name: Checkout code
