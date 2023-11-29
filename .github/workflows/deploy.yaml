@@ -36,8 +36,8 @@ jobs:
 
       - name: Copy Folder
         run: |
-          git clone https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git $REPO_NAME
-          cd $REPO_NAME 
+          git clone https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git 
+          
           cp -a ../template/. ../$REPO_NAME
           echo '
           {
