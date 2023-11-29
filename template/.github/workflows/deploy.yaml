@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  read_json_and_set_env:
     runs-on: ubuntu-latest
 
     env:
@@ -23,6 +23,33 @@ jobs:
         uses: azure/setup-helm@v1
         with:
           version: latest
+
+
+      - name: Parse JSON to Env Variables
+        run: |
+          # Install jq (if not already installed)
+          sudo apt-get update
+          sudo apt-get install jq
+
+          # Read JSON file
+          JSON_CONTENT=$(cat path/to/your/json_file.json)
+
+          # Iterate over JSON keys and set them as environment variables
+          echo "$JSON_CONTENT" | jq -r 'to_entries | .[] | "export \(.key)=\(.value)"' | while read -r line; do
+            eval "$line"
+          done
+      
+      - name: Display Environment Variables
+        run: |
+          echo "REPO_NAME: $REPO_NAME"
+          echo "DESCRIPTION: $DESCRIPTION"
+          echo "PRIVATE: $PRIVATE"
+          echo "INITIALIZE_README: $INITIALIZE_README"
+          echo "DELETE_REPO: $DELETE_REPO"
+          echo "USERNAME: $USERNAME"
+          echo "HELMFILE_PATH: $HELMFILE_PATH"
+          echo "CHARTS_PATH: $CHARTS_PATH"
+          echo "REPO_URL: $REPO_URL"
 
       - name: Add Helm Repository
         run: |
