@@ -41,6 +41,10 @@ jobs:
         for ((i=0; i<$TEST_ARRAY_LENGTH; i++)); do
           set_env_var "TEST_ARRAY_NAME_$i" ".TEST_ARRAY[$i].TEST_ARRAY_NAME"
         done
+      env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          REPO_NAME: ${{ env.REPO_NAME }}
+          DESCRIPTION: ${{ env.DESCRIPTION }}
 
     - name: Display environment variables
       run: env
