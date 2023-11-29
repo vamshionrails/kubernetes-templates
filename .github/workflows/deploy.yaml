@@ -37,15 +37,10 @@ jobs:
       - name: Copy Folder
         run: | 
           cd $REPO_NAME 
-          cp -a ../template/. ../$REPO_NAME
+          cp -r ../template/* ../$REPO_NAME
           git add .
           git commit -m "Copy folder to repository"
           git push origin main  # Change 'main' to the target branch
-         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          REPO_NAME: ${{ env.REPO_NAME }}
-          DESCRIPTION: ${{ env.DESCRIPTION }}
-          DELETE_REPO: ${{ env.DELETE_REPO }}
 
       - name: Install Helm Plugins
         run: |
