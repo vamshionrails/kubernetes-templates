@@ -26,11 +26,11 @@ jobs:
 
       - name: Load Configuration from JSON
         run: |
-          CONFIG_FILE=scripts/config.json
+           CONFIG_FILE=./config.json
           if [ -f $CONFIG_FILE ]; then
-            CONFIG=$(cat $CONFIG_FILE)
-            echo $CONFIG > config.env
-            export $(cat config.env | xargs)
+            while IFS= read -r line; do
+              export "$line"
+            done < <(jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" $CONFIG_FILE)
           else
             echo "Error: Config file not found."
             exit 1
