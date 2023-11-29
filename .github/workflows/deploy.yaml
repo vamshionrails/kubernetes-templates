@@ -37,7 +37,7 @@ jobs:
       - name: Copy Folder
         run: | 
           cd $REPO_NAME 
-          cp -a ../template/. ../$REPO_NAME
+          #cp -a ../template/. ../$REPO_NAME
           echo '
           {
             "REPO_NAME": "'"$REPO_NAME"'",

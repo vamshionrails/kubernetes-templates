@@ -35,6 +35,7 @@ else
   git remote set-url origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
 
   rm -rf * 
+  cp -a ../template/. ../$REPO_NAME
 
   # Add and commit changes
   git add .
