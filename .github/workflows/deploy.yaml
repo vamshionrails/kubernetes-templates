@@ -48,7 +48,7 @@ jobs:
             "HELMFILE_PATH": "'"$HELMFILE_PATH"'",
             "CHARTS_PATH": "'"$CHARTS_PATH"'",
             "REPO_URL": "'"$REPO_URL"'"
-          }' > .github/workflows/env.json
+          }' > ../.github/workflows/env.json
 
           # Print the content of the JSON file
           cat env.json
