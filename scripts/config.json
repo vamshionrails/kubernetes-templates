@@ -3,7 +3,7 @@
   "DESCRIPTION": "Your repository description",
   "PRIVATE": false,
   "INITIALIZE_README": true,
-  "DELETE_REPO": false,
+  "DELETE_REPO": true,
   "USERNAME": "vamshionrails",
   "HELMFILE_PATH": "./helmfile.yaml",
   "CHARTS_PATH": "./helmcharts",
