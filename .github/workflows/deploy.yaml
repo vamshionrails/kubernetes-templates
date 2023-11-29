@@ -34,8 +34,6 @@ jobs:
           DESCRIPTION: ${{ env.DESCRIPTION }}
           DELETE_REPO: ${{ env.DELETE_REPO }}
 
-      
-
       - name: Copy Folder
         run: | 
           cd $REPO_NAME 
@@ -51,9 +49,11 @@ jobs:
             "HELMFILE_PATH": "'"$HELMFILE_PATH"'",
             "CHARTS_PATH": "'"$CHARTS_PATH"'",
             "REPO_URL": "'"$REPO_URL"'"
-          }' > owldq_config.json
+          }' > env_config.json
 
-
+          # Print the content of the JSON file
+          cat env_config.json
+          
           git add .
           git commit -m "Copy folder to repository"
           git push origin main  # Change 'main' to the target branch
