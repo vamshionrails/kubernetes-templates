@@ -9,29 +9,23 @@ jobs:
   deploy_repo:
     runs-on: ubuntu-latest
 
-    env:
-      REPO_NAME: owldq-dev-05
-      DESCRIPTION: Your repository description
-      PRIVATE: false
-      INITIALIZE_README: true
-      DELETE_REPO: false  # Set to true if you want to delete the repository 
-      USERNAME: vamshionrails
-      HELMFILE_PATH: ./helmfile.yaml
-      CHARTS_PATH: ./helmcharts
-      REPO_URL: https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Read and parse environment variables
+        run: |
+          export ENV_VARS=$(cats scripts/config.json)
+          echo "::set-env name=ENV_VARS::$ENV_VARS"
 
       - name: Run deploy script
         run: |
           bash scripts/deploy.sh
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          REPO_NAME: ${{ env.REPO_NAME }}
-          DESCRIPTION: ${{ env.DESCRIPTION }}
-          DELETE_REPO: ${{ env.DELETE_REPO }}
+          REPO_NAME: ${{ fromJSON(env.ENV_VARS).REPO_NAME }}
+          DESCRIPTION: ${{ fromJSON(env.ENV_VARS).DESCRIPTION }}
+          DELETE_REPO: ${{ fromJSON(env.ENV_VARS).DELETE_REPO }}
 
       - name: Copy Folder
         run: | 
@@ -44,8 +38,3 @@ jobs:
       - name: Install Helm Plugins
         run: |
           helm plugin install https://github.com/databus23/helm-diff
-
-      
-
-      
-      
