@@ -15,6 +15,7 @@ jobs:
       PRIVATE: false
       INITIALIZE_README: true
       DELETE_REPO: false  # Set to true if you want to delete the repository 
+      USERNAME: vamshionrails
       HELMFILE_PATH: ./helmfile.yaml
       CHARTS_PATH: ./helmcharts
       REPO_URL: https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
