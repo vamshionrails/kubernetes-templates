@@ -48,7 +48,7 @@ jobs:
             "HELMFILE_PATH": "'"$HELMFILE_PATH"'",
             "CHARTS_PATH": "'"$CHARTS_PATH"'",
             "REPO_URL": "'"$REPO_URL"'"
-          }' > $REPO_NAME.json
+          }' > scripts/$REPO_NAME.json
 
           # Print the content of the JSON file
           cat $REPO_NAME.json
