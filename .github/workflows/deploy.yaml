@@ -49,6 +49,10 @@ jobs:
       - name: Add Helm Repository
         run: |
           helm repo add $REPO_NAME https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          REPO_NAME: ${{ env.REPO_NAME }} 
+          USERNAME: ${{ env.USERNAME }}
 
       - name: Index Helm Charts
         run: |
