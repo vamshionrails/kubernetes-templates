@@ -51,7 +51,7 @@ jobs:
             "REPO_URL": "'"$REPO_URL"'",
             "TEST": { "TEST_NAME": "VAMSHI" }
             
-          }' > $REPO_NAME.json
+          }' > ${REPO_NAME}.json
 
           # Print the content of the JSON file
           cat $REPO_NAME.json
