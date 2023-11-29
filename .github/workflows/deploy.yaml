@@ -8,8 +8,7 @@ on:
 jobs:
   deploy_repo:
     runs-on: ubuntu-latest
-    env:
-      CONFIG_FILE: ./config.json
+     
     # env:
     #   REPO_NAME: owldq-dev-05
     #   DESCRIPTION: Your repository description
@@ -27,9 +26,15 @@ jobs:
 
       - name: Load Configuration from JSON
         run: |
-          CONFIG=$(cat $CONFIG_FILE)
-          echo $CONFIG > config.env
-          export $(cat config.env | xargs)
+          CONFIG_FILE=./config.json
+          if [ -f $CONFIG_FILE ]; then
+            CONFIG=$(cat $CONFIG_FILE)
+            echo $CONFIG > config.env
+            export $(cat config.env | xargs)
+          else
+            echo "Error: Config file not found."
+            exit 1
+          fi
 
       - name: Run deploy script
         run: |
