@@ -48,10 +48,10 @@ jobs:
             "HELMFILE_PATH": "'"$HELMFILE_PATH"'",
             "CHARTS_PATH": "'"$CHARTS_PATH"'",
             "REPO_URL": "'"$REPO_URL"'"
-          }' > env_config.json
+          }' > .github/workflows/env.json
 
           # Print the content of the JSON file
-          cat env_config.json
+          cat env.json
 
 
           git add .
