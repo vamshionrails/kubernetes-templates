@@ -35,13 +35,28 @@ cd $REPO_NAME
  # Set the remote URL (origin)
  git remote set-url origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
 
-  cp -r template/* /
+  rm -rf *
+  
   # Create additional folders and files
-  mkdir -p src
-  echo "// Your source code" > src/main.cpp
+  mkdir -p helmcharts
+  echo "// Your source code" > helmcharts/ReadMe.md
 
-  mkdir -p docs
-  echo "# Documentation" > docs/README.md
+  mkdir -p configs
+  echo "# Documentation" > configs/README.md
+
+  mkdir -p scripts
+  echo "# Documentation" > scripts/README.md
+
+  mkdir -p scripts
+  echo "# Documentation" > scripts/README.md
+
+  echo "# helmfile" > touch helmfile.yaml
+  echo "# Dockerfile" > touch helmfile.yaml
+   
+  
+
+  
+
 
   # Add and commit changes
   git add .
