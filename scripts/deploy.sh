@@ -50,8 +50,11 @@ cd $REPO_NAME
   mkdir -p scripts
   echo "# Documentation" > scripts/README.md
 
-  echo "# helmfile" > touch helmfile.yaml
-  echo "# Dockerfile" > touch helmfile.yaml
+  touch helmfile.yaml
+  touch Dockerfile
+
+  mkdir -p .github/workflows
+  touch .github/workflows/deploy.yaml
    
   
 
