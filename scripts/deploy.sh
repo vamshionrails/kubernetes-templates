@@ -27,7 +27,7 @@ else
   echo "Repository created successfully: $USERNAME/$REPO_NAME"
 
 # Move to the repository directory
-
+ git remote add origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
   # Create additional folders and files
   mkdir -p src
   echo "// Your source code" > src/main.cpp
