@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ENV_FILE: ${{ github.workspace }}/scripts/config.json
+      ENV_FILE: scripts/config.json
 
     steps:
       - name: Checkout code
