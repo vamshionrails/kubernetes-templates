@@ -8,17 +8,18 @@ on:
 jobs:
   deploy_repo:
     runs-on: ubuntu-latest
-
     env:
-      REPO_NAME: owldq-dev-05
-      DESCRIPTION: Your repository description
-      PRIVATE: false
-      INITIALIZE_README: true
-      DELETE_REPO: false  # Set to true if you want to delete the repository 
-      USERNAME: vamshionrails
-      HELMFILE_PATH: ./helmfile.yaml
-      CHARTS_PATH: ./helmcharts
-      REPO_URL: https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
+      CONFIG_FILE: ./config.json
+    # env:
+    #   REPO_NAME: owldq-dev-05
+    #   DESCRIPTION: Your repository description
+    #   PRIVATE: false
+    #   INITIALIZE_README: true
+    #   DELETE_REPO: false  # Set to true if you want to delete the repository 
+    #   USERNAME: vamshionrails
+    #   HELMFILE_PATH: ./helmfile.yaml
+    #   CHARTS_PATH: ./helmcharts
+    #   REPO_URL: https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
 
     steps:
       - name: Checkout code
@@ -41,21 +42,9 @@ jobs:
           git commit -m "Copy folder to repository"
           git push origin main  # Change 'main' to the target branch
 
-      - name: Install Helm Plugins
-        run: |
-          helm plugin install https://github.com/databus23/helm-diff
-
-      - name: Add Helm Repository
-        run: |
-          helm repo add $REPO_NAME https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
-
-      - name: Index Helm Charts
-        run: |
-          helm repo index $CHARTS_PATH 
       
-      - name: Deploy with Helmfile
-        run: |
-          helmfile --file $HELMFILE_PATH apply
+
+      
 
       
       

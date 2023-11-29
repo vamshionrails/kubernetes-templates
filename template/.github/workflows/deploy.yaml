@@ -22,6 +22,18 @@ jobs:
         with:
           version: latest
 
+      - name: Add Helm Repository
+        run: |
+          helm repo add $REPO_NAME https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
+
+      - name: Index Helm Charts
+        run: |
+          helm repo index $CHARTS_PATH 
+      
+      - name: Deploy with Helmfile
+        run: |
+          helmfile --file $HELMFILE_PATH apply
+
       - name: Deploy with Helmfile
         run: |
           helmfile --file $HELMFILE_PATH apply
