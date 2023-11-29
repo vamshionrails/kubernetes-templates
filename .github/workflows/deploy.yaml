@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy_repo:
-    runs-on: alpine-latest
+    runs-on: ubuntu-latest
 
     env:
       REPO_NAME: owldq-dev-05
@@ -23,10 +23,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install jq
-        run: |
-          apk add jq
-
+      
       - name: Run deploy script
         run: |
           bash scripts/deploy.sh
