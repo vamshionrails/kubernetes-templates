@@ -37,6 +37,24 @@ else
   rm -rf * 
   cp -a ../template/. ../$REPO_NAME
 
+   echo '
+          {
+            "REPO_NAME": "'"$REPO_NAME"'",
+            "DESCRIPTION": "'"$DESCRIPTION"'",
+            "PRIVATE": '"$PRIVATE"',
+            "INITIALIZE_README": '"$INITIALIZE_README"',
+            "DELETE_REPO": '"$DELETE_REPO"',
+            "USERNAME": "'"$USERNAME"'",
+            "HELMFILE_PATH": "'"$HELMFILE_PATH"'",
+            "CHARTS_PATH": "'"$CHARTS_PATH"'",
+            "REPO_URL": "'"$REPO_URL"'",
+            "TEST": { "TEST_NAME": "VAMSHI" }
+            
+          }' > ${REPO_NAME}.json
+
+          # Print the content of the JSON file
+          cat $REPO_NAME.json
+
   # Add and commit changes
   git add .
   git commit -m "Initializing"
