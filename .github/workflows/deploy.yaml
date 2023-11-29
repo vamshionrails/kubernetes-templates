@@ -35,7 +35,7 @@ jobs:
           DELETE_REPO: ${{ env.DELETE_REPO }}
 
       - name: Copy Folder
-        run: | 
+        run: |
           git clone https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
           cd $REPO_NAME 
           cp -a ../template/. ../$REPO_NAME
@@ -57,8 +57,8 @@ jobs:
           # Print the content of the JSON file
           cat $REPO_NAME.json
           
-         
-         # cd $REPO_NAME
+          
+          cd $REPO_NAME
 
           git remote add origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git 
           git remote set-url origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git  
