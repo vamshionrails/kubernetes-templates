@@ -15,7 +15,7 @@ jobs:
 
       - name: Read and parse environment variables
         run: |
-          export ENV_VARS=$(cats scripts/config.json)
+          export ENV_VARS=$(cat scripts/config.json)
           echo "::set-env name=ENV_VARS::$ENV_VARS"
 
       - name: Run deploy script
