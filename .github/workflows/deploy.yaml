@@ -46,7 +46,7 @@ jobs:
 
       - name: Index Helm Charts
         run: |
-          helm repo index $CHARTS_PATH --url $REPO_URL
+          helm repo index $CHARTS_PATH --url $REPO_NAME
       
       - name: Deploy with Helmfile
         run: |
