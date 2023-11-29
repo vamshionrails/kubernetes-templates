@@ -22,7 +22,7 @@ jobs:
       run: sudo apt-get install jq
 
     
-     - name: Display environment variables
+    - name: Display environment variables
       run: env
 
     - name: Load JSON and set variables
