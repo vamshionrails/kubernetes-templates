@@ -8,56 +8,42 @@ on:
 jobs:
   deploy_repo:
     runs-on: ubuntu-latest
-     
-    # env:
-    #   REPO_NAME: owldq-dev-05
-    #   DESCRIPTION: Your repository description
-    #   PRIVATE: false
-    #   INITIALIZE_README: true
-    #   DELETE_REPO: false  # Set to true if you want to delete the repository 
-    #   USERNAME: vamshionrails
-    #   HELMFILE_PATH: ./helmfile.yaml
-    #   CHARTS_PATH: ./helmcharts
-    #   REPO_URL: https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
+
+    env:
+      REPO_NAME: owldq-dev-05
+      DESCRIPTION: Your repository description
+      PRIVATE: false
+      INITIALIZE_README: true
+      DELETE_REPO: false  # Set to true if you want to delete the repository 
+      USERNAME: vamshionrails
+      HELMFILE_PATH: ./helmfile.yaml
+      CHARTS_PATH: ./helmcharts
+      REPO_URL: https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Load Configuration from JSON
-        run: |
-          CONFIG_FILE=scripts/config.json
-          if [ -f $CONFIG_FILE ]; then
-            while IFS= read -r line; do
-              export "$line"
-            done < <(jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" $CONFIG_FILE)
-          else
-            echo "Error: Config file not found."
-            exit 1
-          fi
 
       - name: Run deploy script
         run: |
           bash scripts/deploy.sh
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          REPO_NAME: ${REPO_NAME}
-          DESCRIPTION: ${DESCRIPTION }
-          DELETE_REPO: ${DELETE_REPO}
+          REPO_NAME: ${{ env.REPO_NAME }}
+          DESCRIPTION: ${{ env.DESCRIPTION }}
+          DELETE_REPO: ${{ env.DELETE_REPO }}
 
       - name: Copy Folder
         run: | 
-          cp -r template/* $REPO_NAME/
-          cd $REPO_NAME
-          git init
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          cd $REPO_NAME 
+          cp -r ../template/* ../$REPO_NAME
           git add .
           git commit -m "Copy folder to repository"
-          git branch -M main
-          git remote add origin https://github.com/${{ github.repository }}.git
-          git push -u origin main
-      
+          git push origin main  # Change 'main' to the target branch
+
+      - name: Install Helm Plugins
+        run: |
+          helm plugin install https://github.com/databus23/helm-diff
 
       
 
