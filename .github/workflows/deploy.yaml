@@ -44,9 +44,13 @@ jobs:
         run: |
           helm plugin install https://github.com/databus23/helm-diff
 
+      - name: Add Helm Repository
+        run: |
+          helm repo add $REPO_NAME $REPO_URL 
+          
       - name: Index Helm Charts
         run: |
-          helm repo index $CHARTS_PATH --url $REPO_NAME
+          helm repo index $CHARTS_PATH 
       
       - name: Deploy with Helmfile
         run: |
