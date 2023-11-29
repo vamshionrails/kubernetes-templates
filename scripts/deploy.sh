@@ -27,7 +27,14 @@ else
   echo "Repository created successfully: $USERNAME/$REPO_NAME"
 
 # Move to the repository directory
+git clone https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
+cd $REPO_NAME
+
  git remote add origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
+
+ # Set the remote URL (origin)
+git remote set-url origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
+
   # Create additional folders and files
   mkdir -p src
   echo "// Your source code" > src/main.cpp
