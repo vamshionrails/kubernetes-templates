@@ -22,13 +22,17 @@ jobs:
       run: sudo apt-get install jq
 
     
-    - name: Display environment variables
+    - name: Display environment variables before
       run: env
 
     - name: Load JSON and set variables
       run: |
-        JSON_CONTENT=$(cat $REPO_NAME.json)
+        string="$GITHUB_REPOSITORY"
+        result="${string#vamshionrails/}"
+        echo "$result"
 
+        JSON_CONTENT=$(cat "$result.json")
+        echo "$JSON_CONTENT"
         set_env_var() {
           echo "$1=$(echo "$JSON_CONTENT" | jq -r "$2")" >> $GITHUB_ENV
         }
@@ -49,6 +53,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           REPO_NAME: ${{ env.REPO_NAME }}
           DESCRIPTION: ${{ env.DESCRIPTION }}
+          GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
 
     - name: Display environment variables
       run: env
