@@ -25,5 +25,23 @@ else
   # Create a new repository
   curl -u "$USERNAME:$TOKEN" https://api.github.com/user/repos -d "{\"name\":\"$REPO_NAME\",\"description\":\"$DESCRIPTION\",\"private\":$PRIVATE,\"auto_init\":$INITIALIZE_README}"
   echo "Repository created successfully: $USERNAME/$REPO_NAME"
+
+  git clone https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
+  cd $REPO_NAME
+
+  git remote add origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
+
+  # Set the remote URL (origin)
+  git remote set-url origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
+
+  rm -rf * 
+
+  # Add and commit changes
+  git add .
+  git commit -m "Add src and docs folders"
+  git branch -M main
+  git push origin main
+
+  echo "Additional folders and files added to the repository."
  
 fi
