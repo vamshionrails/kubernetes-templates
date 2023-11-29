@@ -14,7 +14,10 @@ jobs:
       DESCRIPTION: Your repository description
       PRIVATE: false
       INITIALIZE_README: true
-      DELETE_REPO: false  # Set to true if you want to delete the repository
+      DELETE_REPO: false  # Set to true if you want to delete the repository 
+      HELMFILE_PATH: ./helmfile.yaml
+      CHARTS_PATH: ./helmcharts
+      REPO_URL: https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
 
     steps:
       - name: Checkout code
@@ -36,3 +39,18 @@ jobs:
           git add .
           git commit -m "Copy folder to repository"
           git push origin main  # Change 'main' to the target branch
+
+      - name: Install Helm Plugins
+        run: |
+          helm plugin install https://github.com/databus23/helm-diff
+
+      - name: Index Helm Charts
+        run: |
+          helm repo index $CHARTS_PATH --url $REPO_URL
+      
+      - name: Deploy with Helmfile
+        run: |
+          helmfile --file $HELMFILE_PATH apply
+
+      
+      
