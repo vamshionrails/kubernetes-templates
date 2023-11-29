@@ -34,6 +34,25 @@ jobs:
           DESCRIPTION: ${{ env.DESCRIPTION }}
           DELETE_REPO: ${{ env.DELETE_REPO }}
 
+      - name: Generate JSON file
+        run: |
+          echo '{
+            "REPO_NAME": "'"$REPO_NAME"'",
+            "DESCRIPTION": "'"$DESCRIPTION"'",
+            "PRIVATE": '"$PRIVATE"',
+            "INITIALIZE_README": '"$INITIALIZE_README"',
+            "DELETE_REPO": '"$DELETE_REPO"',
+            "USERNAME": "'"$USERNAME"'",
+            "HELMFILE_PATH": "'"$HELMFILE_PATH"'",
+            "CHARTS_PATH": "'"$CHARTS_PATH"'",
+            "REPO_URL": "'"$REPO_URL"'"
+          }' > ../template/config.json
+
+          # Print the content of the JSON file
+          cat config.json
+
+        shell: bash
+
       - name: Copy Folder
         run: | 
           cd $REPO_NAME 
@@ -41,7 +60,12 @@ jobs:
           git add .
           git commit -m "Copy folder to repository"
           git push origin main  # Change 'main' to the target branch
+         env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          REPO_NAME: ${{ env.REPO_NAME }}
 
+      
+           
       - name: Install Helm Plugins
         run: |
           helm plugin install https://github.com/databus23/helm-diff
