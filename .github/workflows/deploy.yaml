@@ -61,6 +61,8 @@ jobs:
           git add .
           git commit -m "Copy folder to repository"
           git push origin main  # Change 'main' to the target branch
+      env:
+         REPO_NAME: ${{ env.REPO_NAME }}
 
       - name: Install Helm Plugins
         run: |
