@@ -25,49 +25,5 @@ else
   # Create a new repository
   curl -u "$USERNAME:$TOKEN" https://api.github.com/user/repos -d "{\"name\":\"$REPO_NAME\",\"description\":\"$DESCRIPTION\",\"private\":$PRIVATE,\"auto_init\":$INITIALIZE_README}"
   echo "Repository created successfully: $USERNAME/$REPO_NAME"
-
-# Move to the repository directory
-git clone https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
-cd $REPO_NAME
-
- git remote add origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
-
- # Set the remote URL (origin)
- git remote set-url origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git
-
-  rm -rf *
-  
-  # Create additional folders and files
-  mkdir -p helmcharts
-  echo "// Your source code" > helmcharts/ReadMe.md
-
-  mkdir -p configs
-  echo "# Documentation" > configs/README.md
-
-  mkdir -p scripts
-  echo "# Documentation" > scripts/README.md
-
-  mkdir -p scripts
-  echo "# Documentation" > scripts/README.md
-
-  touch helmfile.yaml
-  touch Dockerfile
-
-  mkdir -p .github/workflows
-  touch .github/workflows/deploy.yaml
-   
-  
-
-  
-
-
-  # Add and commit changes
-  git add .
-  git commit -m "Add src and docs folders"
-  git branch -M main
-  git push origin main
-
-  echo "Additional folders and files added to the repository."
-
  
 fi
