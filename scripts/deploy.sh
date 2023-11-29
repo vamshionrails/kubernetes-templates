@@ -57,7 +57,7 @@ else
 
   # Add and commit changes
   git add .
-  git commit -m "Initializing"
+  git commit -m "Initialize..."
   git branch -M main
   git push origin main
 
