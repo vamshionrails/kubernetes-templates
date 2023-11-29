@@ -26,7 +26,7 @@ jobs:
 
       - name: Load Configuration from JSON
         run: |
-          CONFIG_FILE=./config.json
+          CONFIG_FILE=scripts/config.json
           if [ -f $CONFIG_FILE ]; then
             CONFIG=$(cat $CONFIG_FILE)
             echo $CONFIG > config.env
