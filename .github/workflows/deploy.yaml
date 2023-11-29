@@ -39,13 +39,7 @@ jobs:
           cd $REPO_NAME 
           cp -a ../template/. ../$REPO_NAME
 
-          echo '{
-            "REPO_NAME": "$REPO_NAME",
-            
-          }' > env_config.json
-
-          # Print the content of the JSON file
-          cat env_config.json
+        
 
           git add .
           git commit -m "Copy folder to repository"
