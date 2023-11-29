@@ -21,6 +21,10 @@ jobs:
     - name: Install jq
       run: sudo apt-get install jq
 
+    
+     - name: Display environment variables
+      run: env
+
     - name: Load JSON and set variables
       run: |
         JSON_CONTENT=$(cat $REPO_NAME.json)
