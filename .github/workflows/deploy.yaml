@@ -35,9 +35,8 @@ jobs:
           DELETE_REPO: ${{ env.DELETE_REPO }}
 
       - name: Copy Folder
-        run: |
-          git clone https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git 
-          
+        run: | 
+          cd $REPO_NAME 
           cp -a ../template/. ../$REPO_NAME
           echo '
           {
@@ -56,13 +55,6 @@ jobs:
 
           # Print the content of the JSON file
           cat $REPO_NAME.json
-          
-          
-          cd $REPO_NAME
-
-          git remote add origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git 
-          git remote set-url origin https://$USERNAME:$TOKEN@github.com/$USERNAME/$REPO_NAME.git  
-
           git add .
           git commit -m "Copy folder to repository"
           git push origin main  # Change 'main' to the target branch
