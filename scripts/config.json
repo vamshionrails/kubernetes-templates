@@ -1,9 +1,9 @@
 {
     "REPO_NAME": "owldq-dev-05",
     "DESCRIPTION": "Your repository description",
-    "PRIVATE": false,
-    "INITIALIZE_README": true,
-    "DELETE_REPO": false,
+    "PRIVATE": "false",
+    "INITIALIZE_README": "true",
+    "DELETE_REPO": "false",
     "USERNAME": "vamshionrails",
     "REPO_URL": "https://raw.githubusercontent.com/your-username/your-repo/main/helmcharts",
     "HELMFILE_PATH": "./helmfile.yaml",
