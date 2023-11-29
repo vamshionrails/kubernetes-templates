@@ -52,6 +52,11 @@ jobs:
           git add .
           git commit -m "Copy folder to repository"
           git push origin main  # Change 'main' to the target branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          REPO_NAME: ${REPO_NAME}
+          DESCRIPTION: ${DESCRIPTION }
+          DELETE_REPO: ${DELETE_REPO}
 
       
 
