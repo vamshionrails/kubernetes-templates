@@ -32,7 +32,7 @@ jobs:
           sudo apt-get install jq
 
           # Read JSON file
-          JSON_CONTENT=$(cat ../owldq-dev.json)
+          JSON_CONTENT=$(cat owldq-dev.json)
 
           # Iterate over JSON keys and set them as environment variables
           echo "$JSON_CONTENT" | jq -r 'to_entries | .[] | "export \(.key)=\(.value)"' | while read -r line; do
