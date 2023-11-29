@@ -7,26 +7,34 @@ on:
 
 jobs:
   deploy_repo:
-    runs-on: ubuntu-latest
+    runs-on: alpine-latest
 
     env:
-      ENV_FILE: scripts/config.json
+      REPO_NAME: owldq-dev-05
+      DESCRIPTION: Your repository description
+      PRIVATE: false
+      INITIALIZE_README: true
+      DELETE_REPO: false  # Set to true if you want to delete the repository 
+      HELMFILE_PATH: ./helmfile.yaml
+      CHARTS_PATH: ./helmcharts
+      REPO_URL: https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Environment
-        run: echo "ENV_FILE=${{ env.ENV_FILE }}" >> $GITHUB_ENV
+      - name: Install jq
+        run: |
+          apk add jq
 
       - name: Run deploy script
         run: |
           bash scripts/deploy.sh
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          REPO_NAME: ${{fromJson(file(env.ENV_FILE)).REPO_NAME}}
-          DESCRIPTION: ${{fromJson(file(env.ENV_FILE)).DESCRIPTION}}
-          DELETE_REPO: ${{fromJson(file(env.ENV_FILE)).DELETE_REPO}}
+          REPO_NAME: ${{ env.REPO_NAME }}
+          DESCRIPTION: ${{ env.DESCRIPTION }}
+          DELETE_REPO: ${{ env.DELETE_REPO }}
 
       - name: Copy Folder
         run: | 
@@ -39,3 +47,18 @@ jobs:
       - name: Install Helm Plugins
         run: |
           helm plugin install https://github.com/databus23/helm-diff
+
+      - name: Add Helm Repository
+        run: |
+          helm repo add $REPO_NAME https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
+
+      - name: Index Helm Charts
+        run: |
+          helm repo index $CHARTS_PATH 
+      
+      - name: Deploy with Helmfile
+        run: |
+          helmfile --file $HELMFILE_PATH apply
+
+      
+      
