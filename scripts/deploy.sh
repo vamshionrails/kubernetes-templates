@@ -37,9 +37,9 @@ else
   rm -rf * 
 
   # Add and commit changes
-  # git add .
-  # git commit -m "Add src and docs folders"
-  # git branch -M main
+  git add .
+  git commit -m "Initializing"
+  git branch -M main
   git push origin main
 
   echo "Additional folders and files added to the repository."
