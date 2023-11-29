@@ -1,1 +1,27 @@
-# Deploy.yaml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      HELMFILE_PATH: ./helmfile.yaml
+      # Add other environment variables as needed
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Helm and Helmfile
+        uses: azure/setup-helm@v1
+        with:
+          version: latest
+
+      - name: Deploy with Helmfile
+        run: |
+          helmfile --file $HELMFILE_PATH apply
