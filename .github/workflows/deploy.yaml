@@ -9,23 +9,24 @@ jobs:
   deploy_repo:
     runs-on: ubuntu-latest
 
+    env:
+      ENV_FILE: ${{ github.workspace }}/scripts/config.json
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Read and parse environment variables
-        run: |
-          export ENV_VARS=$(cat scripts/config.json)
-          echo "::set-env name=ENV_VARS::$ENV_VARS"
+      - name: Set up Environment
+        run: echo "ENV_FILE=${{ env.ENV_FILE }}" >> $GITHUB_ENV
 
       - name: Run deploy script
         run: |
           bash scripts/deploy.sh
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          REPO_NAME: ${{ fromJSON(env.ENV_VARS).REPO_NAME }}
-          DESCRIPTION: ${{ fromJSON(env.ENV_VARS).DESCRIPTION }}
-          DELETE_REPO: ${{ fromJSON(env.ENV_VARS).DELETE_REPO }}
+          REPO_NAME: ${{fromJson(file(env.ENV_FILE)).REPO_NAME}}
+          DESCRIPTION: ${{fromJson(file(env.ENV_FILE)).DESCRIPTION}}
+          DELETE_REPO: ${{fromJson(file(env.ENV_FILE)).DELETE_REPO}}
 
       - name: Copy Folder
         run: | 
