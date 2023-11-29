@@ -56,7 +56,7 @@ jobs:
           # Print the content of the JSON file
           cat $REPO_NAME.json
           
-          mv $REPO_NAME.json .github/workflows/
+          #mv $REPO_NAME.json .github/workflows/
 
           git add .
           git commit -m "Copy folder to repository"
