@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Load JSON and Set Variables
 
 on:
   push:
@@ -6,65 +6,41 @@ on:
       - main
 
 jobs:
-  read_json_and_set_env:
+  load-json-and-set-vars:
     runs-on: ubuntu-latest
 
-    env:
-      HELMFILE_PATH: ./helmfile.yaml
-      # Add other environment variables as needed 
-      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-      REPO_NAME: ${REPO_NAME}
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Set up Helm and Helmfile
-        uses: azure/setup-helm@v1
-        with:
-          version: latest
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
 
+    - name: Install jq
+      run: sudo apt-get install jq
 
-      - name: Parse JSON to Env Variables
-        run: |
-          # Install jq (if not already installed)
-          sudo apt-get update
-          sudo apt-get install jq
+    - name: Load JSON and set variables
+      run: |
+        JSON_CONTENT=$(cat $REPO_NAME.json)
 
-          # Read JSON file
-          JSON_CONTENT=$(cat ./owldq-dev.json)
+        set_env_var() {
+          echo "$1=$(echo "$JSON_CONTENT" | jq -r "$2")" >> $GITHUB_ENV
+        }
 
-          # Iterate over JSON keys and set them as environment variables
-          echo "$JSON_CONTENT" | jq -r 'to_entries | .[] | "export \(.key)=\(.value)"' | while read -r line; do
-            eval "$line"
-          done
-      
-      - name: Display Environment Variables
-        run: |
-          echo "REPO_NAME: $REPO_NAME"
-          echo "DESCRIPTION: $DESCRIPTION"
-          echo "PRIVATE: $PRIVATE"
-          echo "INITIALIZE_README: $INITIALIZE_README"
-          echo "DELETE_REPO: $DELETE_REPO"
-          echo "USERNAME: $USERNAME"
-          echo "HELMFILE_PATH: $HELMFILE_PATH"
-          echo "CHARTS_PATH: $CHARTS_PATH"
-          echo "REPO_URL: $REPO_URL"
+        set_env_var "REPO_NAME" '.REPO_NAME'
+        set_env_var "DESCRIPTION" '.DESCRIPTION'
+        set_env_var "PRIVATE" '.PRIVATE'
 
-      - name: Add Helm Repository
-        run: |
-          helm repo add $REPO_NAME https://raw.githubusercontent.com/$USERNAME/$REPO_NAME/main/helmcharts
+        # Set nested variables
+        set_env_var "TEST_NAME" '.TEST.TEST_NAME'
 
-      - name: Index Helm Charts
-        run: |
-          helm repo index $CHARTS_PATH 
-      
-      - name: Deploy with Helmfile
-        run: |
-          helmfile --file $HELMFILE_PATH apply
+        # Set variables from TEST_ARRAY
+        TEST_ARRAY_LENGTH=$(echo "$JSON_CONTENT" | jq -r '.TEST_ARRAY | length')
+        for ((i=0; i<$TEST_ARRAY_LENGTH; i++)); do
+          set_env_var "TEST_ARRAY_NAME_$i" ".TEST_ARRAY[$i].TEST_ARRAY_NAME"
+        done
 
-      - name: Deploy with Helmfile
-        run: |
-          helmfile --file $HELMFILE_PATH apply
-
-        
+    - name: Display environment variables
+      run: env
