@@ -25,6 +25,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Load Configuration from JSON
+        run: |
+          CONFIG=$(cat $CONFIG_FILE)
+          echo $CONFIG > config.env
+          export $(cat config.env | xargs)
+
       - name: Run deploy script
         run: |
           bash scripts/deploy.sh
