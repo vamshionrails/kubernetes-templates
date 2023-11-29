@@ -34,8 +34,13 @@ jobs:
           DESCRIPTION: ${{ env.DESCRIPTION }}
           DELETE_REPO: ${{ env.DELETE_REPO }}
 
-      - name: Generate JSON file
-        run: |
+      
+
+      - name: Copy Folder
+        run: | 
+          cd $REPO_NAME 
+          cp -a ../template/. ../$REPO_NAME
+
           echo '{
             "REPO_NAME": "'"$REPO_NAME"'",
             "DESCRIPTION": "'"$DESCRIPTION"'",
@@ -46,17 +51,9 @@ jobs:
             "HELMFILE_PATH": "'"$HELMFILE_PATH"'",
             "CHARTS_PATH": "'"$CHARTS_PATH"'",
             "REPO_URL": "'"$REPO_URL"'"
-          }' > ../template/config.json
+          }' > owldq_config.json
 
-          # Print the content of the JSON file
-          cat config.json
 
-        shell: bash
-
-      - name: Copy Folder
-        run: | 
-          cd $REPO_NAME 
-          cp -a ../template/. ../$REPO_NAME
           git add .
           git commit -m "Copy folder to repository"
           git push origin main  # Change 'main' to the target branch
