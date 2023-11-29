@@ -11,8 +11,9 @@ jobs:
 
     env:
       HELMFILE_PATH: ./helmfile.yaml
-      # Add other environment variables as needed
-      
+      # Add other environment variables as needed 
+      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+      REPO_NAME: $REPO_NAME
 
     steps:
       - name: Checkout Repository
