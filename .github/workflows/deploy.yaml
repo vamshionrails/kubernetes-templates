@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      REPO_NAME: owldq-dev-04
+      REPO_NAME: owldq-dev-05
       DESCRIPTION: Your repository description
       PRIVATE: false
       INITIALIZE_README: true
