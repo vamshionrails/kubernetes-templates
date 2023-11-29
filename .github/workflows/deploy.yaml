@@ -41,9 +41,9 @@ jobs:
           bash scripts/deploy.sh
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          REPO_NAME: ${{ env.REPO_NAME }}
-          DESCRIPTION: ${{ env.DESCRIPTION }}
-          DELETE_REPO: ${{ env.DELETE_REPO }}
+          REPO_NAME: ${REPO_NAME}
+          DESCRIPTION: ${DESCRIPTION }
+          DELETE_REPO: ${DELETE_REPO}
 
       - name: Copy Folder
         run: | 
