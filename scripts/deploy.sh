@@ -38,9 +38,9 @@ else
 
   # Add and commit changes
   git add .
-  git commit -m "Initializing"
-  git branch -M main
-  git push origin main
+  # git commit -m "Initializing"
+  # git branch -M main
+  # git push origin main
 
   echo "Additional folders and files added to the repository."
  
