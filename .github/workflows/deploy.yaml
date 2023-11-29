@@ -51,7 +51,7 @@ jobs:
           }' > ../.github/workflows/env.json
 
           # Print the content of the JSON file
-          cat env.json
+          cat ../.github/workflows/env.json
 
 
           git add .
