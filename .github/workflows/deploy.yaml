@@ -32,7 +32,7 @@ jobs:
       - name: Copy Folder
         run: |
           cd $REPO_NAME 
-          cp -r ../template/* $REPO_NAME
+          cp -r ../template/* ../$REPO_NAME
           git add .
           git commit -m "Copy folder to repository"
           git push origin main  # Change 'main' to the target branch
