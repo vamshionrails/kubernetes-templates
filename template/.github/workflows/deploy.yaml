@@ -82,8 +82,7 @@ jobs:
         git add -A 
         git commit -m "Update Helm charts ($(date +"%Y-%m-%d %H:%M:%S"))"
         git branch -M main
-        #git remote add origin https://$GITHUB_ACTOR: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@github.com/${{ github.repository }}.git
-        git push -u origin main
+        #git remote add origin https://$GITHUB_ACTOR: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@github.com/${{ github.repository }}.git 
         git push https://$GITHUB_ACTOR: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@github.com/vamshionrails/$REPO_NAME HEAD:main
    
     
