@@ -57,6 +57,10 @@ jobs:
           cat $REPO_NAME.json
           git add .
           git commit -m "Copy folder to repository"
+           # Check if "origin" remote already exists
+          if ! git remote | grep -q '^origin$'; then
+            git remote add origin https://github.com/vamshionrails/${{ github.repository }}.git
+          fi        
           git push origin main  # Change 'main' to the target branch
         env:
           REPO_NAME: ${{ env.REPO_NAME }}
