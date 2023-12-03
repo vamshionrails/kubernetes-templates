@@ -59,7 +59,7 @@ jobs:
           git commit -m "Copy folder to repository"
            # Check if "origin" remote already exists
           if ! git remote | grep -q '^origin$'; then
-            git remote add origin https://$GITHUB_ACTOR:$PAT_TOKEN/github.com/vamshionrails/${{ github.repository }}.git
+            git remote add origin https://$GITHUB_ACTOR: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/github.com/vamshionrails/${{ github.repository }}.git
           fi        
           git push origin main  # Change 'main' to the target branch
         env:
