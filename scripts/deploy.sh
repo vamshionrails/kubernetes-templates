@@ -2,7 +2,7 @@
 
 # GitHub credentials
 USERNAME="$GITHUB_ACTOR"
-TOKEN="$GITHUB_TOKEN"  # Access the GITHUB_TOKEN directly
+TOKEN="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"  # Access the GITHUB_TOKEN directly
 
 # Repository details
 PRIVATE=$PRIVATE
