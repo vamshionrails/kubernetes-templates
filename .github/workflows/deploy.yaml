@@ -23,8 +23,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      
+        
       - name: Run deploy script
         run: |
           bash scripts/deploy.sh
